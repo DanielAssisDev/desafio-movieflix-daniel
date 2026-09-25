@@ -45,7 +45,7 @@ public class ResourceExceptionHandler {
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	public ResponseEntity<ValidationErrorDTO> validation(MethodArgumentNotValidException e, HttpServletRequest request) {
-		HttpStatus status = HttpStatus.UNPROCESSABLE_ENTITY;
+		HttpStatus status = HttpStatus.UNPROCESSABLE_CONTENT;
 		ValidationErrorDTO err = new ValidationErrorDTO();
 		err.setTimestamp(Instant.now());
 		err.setStatus(status.value());
