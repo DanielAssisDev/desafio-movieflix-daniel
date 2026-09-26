@@ -3,6 +3,7 @@ package com.devsuperior.movieflix.services;
 import com.devsuperior.movieflix.dto.MovieCardDTO;
 import com.devsuperior.movieflix.dto.MovieDetailsDTO;
 
+import com.devsuperior.movieflix.dto.ReviewDTO;
 import com.devsuperior.movieflix.entities.Movie;
 import com.devsuperior.movieflix.projections.MovieCardProjection;
 import com.devsuperior.movieflix.repositories.MovieRepository;
@@ -29,6 +30,11 @@ public class MovieService {
     public MovieDetailsDTO findById(Long id) {
         return new MovieDetailsDTO(movieRepository.findById(id).orElseThrow(
                 () -> new ResourceNotFoundException("Filme não encontrado")));
+    }
+
+    @Transactional(readOnly = true)
+    public List<ReviewDTO> findReviews(Long id) {
+        return movieRepository.searchReviews(id).stream().map(ReviewDTO::new).toList();
     }
 
     @SuppressWarnings("unchecked")

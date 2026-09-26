@@ -1,6 +1,7 @@
 package com.devsuperior.movieflix.repositories;
 
 import com.devsuperior.movieflix.entities.Movie;
+import com.devsuperior.movieflix.entities.Review;
 import com.devsuperior.movieflix.projections.MovieCardProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,6 +20,9 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
 
     @Query(value = "SELECT m FROM Movie m JOIN FETCH m.genre WHERE (m.id IN :movies) ORDER BY m.title")
     List<Movie> searchMoviesWithCategories(List<Long> movies);
+
+    @Query(value = "SELECT r FROM Review r JOIN FETCH r.movie WHERE r.movie.id = :id")
+    List<Review> searchReviews(Long id);
 
     @Query(nativeQuery = true, value = """
             SELECT * FROM (
