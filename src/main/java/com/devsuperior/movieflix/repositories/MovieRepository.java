@@ -11,6 +11,8 @@ import java.util.List;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
-    @Query("SELECT m FROM Movie m JOIN FETCH m.genre WHERE :genres IS NULL OR m.genre.id IN :genres")
-    Page<Movie> searchMoviesByGenre(Pageable pageable, List<Long> genres);
+    @Query("SELECT m FROM Movie m JOIN FETCH m.genre " +
+            "WHERE (:genres IS NULL OR m.genre.id IN :genres) AND LOWER(m.title) LIKE LOWER(CONCAT('%', :title ,'%')) " +
+            "ORDER BY CONCAT('m.', :orderBy) asc")
+    Page<Movie> searchMoviesByGenre(Pageable pageable, String title, List<Long> genres, String orderBy);
 }
