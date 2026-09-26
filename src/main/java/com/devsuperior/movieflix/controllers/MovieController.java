@@ -25,8 +25,8 @@ public class MovieController {
     @GetMapping
     public Page<MovieCardDTO> findAll(
             Pageable pageable,
-            @RequestParam(value = "name", defaultValue = "") String name,
-            @RequestParam(value = "genreId", defaultValue = "0") String genre) {
-        return movieService.findAll(pageable, name, genre);
+            @RequestParam(value = "title", defaultValue = "") String title,
+            @RequestParam(value = "genreId", defaultValue = "0") String genres) {
+        return movieService.findAll(pageable, title, genres);
     }
 }
