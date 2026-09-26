@@ -2,7 +2,7 @@ package com.devsuperior.movieflix.services;
 
 import com.devsuperior.movieflix.dto.MovieCardDTO;
 import com.devsuperior.movieflix.dto.MovieDetailsDTO;
-import com.devsuperior.movieflix.entities.User;
+
 import com.devsuperior.movieflix.repositories.MovieRepository;
 import com.devsuperior.movieflix.services.exceptions.ResourceNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,9 +10,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import java.util.Arrays;
-import java.util.List;
 
 @Service
 public class MovieService {
@@ -30,12 +27,6 @@ public class MovieService {
 
     @Transactional
     public Page<MovieCardDTO> findAll(Pageable pageable, String title, String genres) {
-        List<Long> genresLong = null;
-        String orderBy = "id";
-        if (!"0".equals(genres)) {
-            genresLong = Arrays.stream(genres.split(",")).map(Long::parseLong).toList();
-            orderBy = "title";
-        }
-        return movieRepository.searchMoviesByGenre(pageable, title, genresLong, orderBy).map(MovieCardDTO::new);
+        return null;
     }
 }
