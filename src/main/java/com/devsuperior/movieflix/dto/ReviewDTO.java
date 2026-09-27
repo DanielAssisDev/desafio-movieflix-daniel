@@ -3,6 +3,7 @@ package com.devsuperior.movieflix.dto;
 import com.devsuperior.movieflix.entities.Review;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
 
 public class ReviewDTO {
 
@@ -12,6 +13,7 @@ public class ReviewDTO {
     private String text;
 
     @NotNull(message = "Campo requerido")
+	@Positive(message = "Deve ser maior que zero")
     private Long movieId;    
     
     private Long userId;
@@ -25,6 +27,9 @@ public class ReviewDTO {
 		userId = review.getId();
 		userName = review.getUser().getName();
 		userEmail = review.getUser().getEmail();
+	}
+
+	public ReviewDTO() {
 	}
 
 	public Long getId() {
