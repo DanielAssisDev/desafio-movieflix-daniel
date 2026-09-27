@@ -1,5 +1,6 @@
 package com.devsuperior.movieflix.projections;
 
-public interface MovieCardProjection extends IdProjection<Long> {
+public interface MovieCardProjection {
+    Long getId();
     String getTitle();
 }

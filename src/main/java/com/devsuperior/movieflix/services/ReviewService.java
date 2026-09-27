@@ -20,9 +20,6 @@ public class ReviewService {
     private MovieRepository movieRepository;
 
     @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
     private AuthService authService;
 
     @Transactional

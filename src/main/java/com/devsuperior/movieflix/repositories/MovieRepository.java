@@ -11,13 +11,9 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 
 @Repository
 public interface MovieRepository extends JpaRepository<Movie, Long> {
-    @Query(value = "SELECT m FROM Movie m JOIN FETCH m.genre WHERE m.genre.id = :id")
-    Optional<Movie> getMovieById(Long id);
-
     @Query(value = "SELECT m FROM Movie m JOIN FETCH m.genre WHERE (m.id IN :movies) ORDER BY m.title")
     List<Movie> searchMoviesWithCategories(List<Long> movies);
 
