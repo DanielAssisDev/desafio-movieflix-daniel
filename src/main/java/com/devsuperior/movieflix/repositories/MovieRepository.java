@@ -24,14 +24,14 @@ public interface MovieRepository extends JpaRepository<Movie, Long> {
             SELECT * FROM (
             SELECT DISTINCT m.id, m.title FROM tb_movie m
             INNER JOIN tb_genre g ON m.genre_id=g.id
-            WHERE (:genres IS NULL OR g.id IN :genres)
+            WHERE (0 IN :genres OR g.id IN :genres)
             AND LOWER(m.title) LIKE LOWER(CONCAT('%', :title ,'%')))
             AS tb_result
             """, countQuery = """
             SELECT COUNT(*) FROM(
             SELECT DISTINCT m.id, m.title FROM tb_movie m
             INNER JOIN tb_genre g ON m.genre_id=g.id
-            WHERE (:genres IS NULL OR g.id IN :genres)
+            WHERE (0 IN :genres OR g.id IN :genres)
             AND LOWER(m.title) LIKE LOWER(CONCAT('%', :title ,'%'))) AS tb_result
             """)
     Page<MovieCardProjection> searchMovies(Pageable pageable, String title, List<Long> genres);

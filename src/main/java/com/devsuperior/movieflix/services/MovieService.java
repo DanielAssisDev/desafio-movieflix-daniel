@@ -40,7 +40,7 @@ public class MovieService {
     @SuppressWarnings("unchecked")
     @Transactional
     public Page<MovieCardDTO> findAll(Pageable pageable, String title, String genres) {
-        List<Long> genresLong = List.of();
+        List<Long> genresLong = List.of(0L);
         if (!"0".equals(genres)) {
             genresLong = Arrays.stream(genres.split(",")).map(Long::parseLong).toList();
         }
